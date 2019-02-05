@@ -1,0 +1,15 @@
+- name: install rpmfusion free and non-free repos
+  dnf:
+    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm"
+    state: present
+  become: yes
+- name: install cuda repo
+  dnf:
+    name: "http://developer.download.nvidia.com/compute/cuda/repos/fedora27/x86_64/cuda-repo-fedora27-9.2.148-1.x86_64.rpm"
+    state: present
+  become: yes
+- name: install nvidia driver and cuda
+  dnf:
+    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda,xorg-x11-drv-nvidia-cuda,cuda"
+    state: present
+  become: yes

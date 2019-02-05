@@ -1,0 +1,10 @@
+- name: install zsh
+  dnf:
+    name: zsh
+    state: present
+  become: yes
+- name: change shell to zsh
+  user:
+    name: whs
+    shell: /usr/bin/zsh
+  become: yes

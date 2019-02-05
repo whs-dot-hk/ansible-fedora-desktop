@@ -1,0 +1,13 @@
+- name: install nvim
+  dnf:
+    name: neovim
+    state: present
+  become: yes
+- name: create nvim autoload directory
+  file:
+    path: ~/.local/share/nvim/site/autoload
+    state: directory
+- name: install vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: $HOME/.local/share/nvim/site/autoload/plug.vim
