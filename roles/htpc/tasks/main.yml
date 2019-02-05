@@ -10,6 +10,6 @@
   become: yes
 - name: install nvidia driver and cuda
   dnf:
-    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda,xorg-x11-drv-nvidia-cuda,cuda"
+    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda,cuda"
     state: present
   become: yes
