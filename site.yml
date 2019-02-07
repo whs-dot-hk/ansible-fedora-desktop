@@ -1,6 +1,7 @@
 - name: install nvim
   hosts: all
   roles:
+  - common
   - htpc
   - nvim
   - zsh

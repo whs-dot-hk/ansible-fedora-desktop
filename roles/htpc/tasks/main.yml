@@ -3,13 +3,33 @@
     name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm"
     state: present
   become: yes
-- name: install cuda repo
+- name: install nvidia driver
   dnf:
-    name: "http://developer.download.nvidia.com/compute/cuda/repos/fedora27/x86_64/cuda-repo-fedora27-9.2.148-1.x86_64.rpm"
+    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda"
     state: present
   become: yes
-- name: install nvidia driver and cuda
+- name: download cuda rpm
+  get_url:
+    url: https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64
+    dest: /home/whs/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm
+- name: install the cuda rpm
   dnf:
-    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda,cuda"
+    name: /home/whs/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm
     state: present
   become: yes
+- name: install ffmpeg, mpv and smplayer
+  dnf:
+    name: "ffmpeg,mpv,qt5,smplayer"
+    state: present
+  become: yes
+- name: create smplayer config directory
+  file:
+    path: /home/whs/.config/smplayer
+    state: directory
+- name: copy smplayer.ini
+  template:
+    src: smplayer.ini
+    dest: /home/whs/.config/smplayer/smplayer.ini
+- import_tasks: makemkv.yml
+  vars:
+    makemkv_version: 1.14.2
