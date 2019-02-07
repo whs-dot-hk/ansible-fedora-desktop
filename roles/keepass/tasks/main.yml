@@ -1,0 +1,10 @@
+- name: install keepass
+  dnf:
+    name: keepass
+    state: present
+  become: yes
+- name: download keepassrpc
+  get_url:
+    url: https://github.com/kee-org/keepassrpc/releases/download/v1.8.0/KeePassRPC.plgx
+    dest: /usr/lib/keepass/KeePassRPC.plgx
+  become: yes

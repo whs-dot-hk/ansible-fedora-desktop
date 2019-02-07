@@ -1,43 +1,13 @@
-- name: download makemkv bin
-  unarchive:
-    src: http://www.makemkv.com/download/makemkv-bin-{{ makemkv_version }}.tar.gz
-    dest: /home/whs/Downloads
-    remote_src: yes
-- name: download makemkv oss
-  unarchive:
-    src: http://www.makemkv.com/download/makemkv-oss-{{ makemkv_version }}.tar.gz
-    dest: /home/whs/Downloads
-    remote_src: yes
-- name: create makemkv bin tmp directory
-  file:
-    path: /home/whs/Downloads/makemkv-bin-{{ makemkv_version }}/tmp
-    state: directory
-- name: accept makemkv bin eula
-  template:
-    src: eula_accepted
-    dest: /home/whs/Downloads/makemkv-bin-{{ makemkv_version }}/tmp/eula_accepted
-- name: install makemkv bin
-  make:
-    chdir: /home/whs/Downloads/makemkv-bin-{{ makemkv_version }}
-    target: install
-  become: yes
-- name: install makemkv oss build dependencies
-  dnf:
-    name: "openssl-devel,expat-devel,qt5-devel,ffmpeg-devel"
-    state: present
-  become: yes
-- name: run makemkv oss configure script
-  command: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}/configure
-  args:
-    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
-- name: build makemkv oss
-  make:
-    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
-    params:
-      NUM_THREADS: 9
-- name: install makemkv oss
-  make:
-    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
-    target: install
-  become: yes
+- name: get makemkvcon stat
+  stat:
+    path: /usr/bin/makemkvcon
+  register: st
+- import_tasks: makemkv-bin.yml
+  when: not st.stat.exists
+- name: get makemkv stat     
+  stat:
+    path: /usr/bin/makemkv    
+  register: st
+- import_tasks: makemkv-oss.yml
+  when: not st.stat.exists
 

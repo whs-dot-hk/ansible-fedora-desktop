@@ -1,0 +1,24 @@
+- name: download makemkv oss
+  unarchive:
+    src: http://www.makemkv.com/download/makemkv-oss-{{ makemkv_version }}.tar.gz
+    dest: /home/whs/Downloads
+    remote_src: yes
+- name: install makemkv oss build dependencies
+  dnf:
+    name: "openssl-devel,expat-devel,qt5-devel,ffmpeg-devel"
+    state: present
+  become: yes
+- name: run makemkv oss configure script
+  command: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}/configure
+  args:
+    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
+- name: build makemkv oss
+  make:
+    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
+    params:
+      NUM_THREADS: 9
+- name: install makemkv oss
+  make:
+    chdir: /home/whs/Downloads/makemkv-oss-{{ makemkv_version }}
+    target: install
+  become: yes
