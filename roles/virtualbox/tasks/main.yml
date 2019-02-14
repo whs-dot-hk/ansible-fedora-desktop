@@ -1,0 +1,15 @@
+- name: download virtualbox repo
+  get_url:
+    url: https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+    dest: /etc/yum.repos.d/virtualbox.repo
+  become: yes
+- name: import virtualbox key
+  rpm_key:
+    state: present
+    key: https://www.virtualbox.org/download/oracle_vbox.asc
+  become: yes
+- name: install virtualbox 6
+  dnf:
+    name: VirtualBox-6.0
+    state: present
+  become: yes
