@@ -1,0 +1,10 @@
+- name: install kubernetes repo
+  template:
+    src: kubernetes.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+  become: yes
+- name: install kubectl
+  dnf:
+    name: kubectl
+    state: present
+  become: yes

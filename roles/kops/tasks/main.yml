@@ -1,0 +1,15 @@
+- name: get kops latest version
+  shell: curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4
+  args:
+    warn: False
+  register: version_result
+- name: install kops
+  get_url:
+    url: https://github.com/kubernetes/kops/releases/download/{{ version_result.stdout }}/kops-linux-amd64
+    dest: /usr/local/bin/kops
+    mode: 0755
+  become: yes
+- name: install awscli
+  pip:
+    name: awscli
+    extra_args: --user

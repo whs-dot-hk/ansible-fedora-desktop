@@ -8,3 +8,5 @@
   - keepass
   - wine
   - virtualbox
+  - kops
+  - kubectl

@@ -1,4 +1,4 @@
-- name: download virtualbox repo
+- name: install virtualbox repo
   get_url:
     url: https://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
     dest: /etc/yum.repos.d/virtualbox.repo
