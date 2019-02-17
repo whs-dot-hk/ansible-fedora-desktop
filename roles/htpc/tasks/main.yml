@@ -1,11 +1,11 @@
 - name: install rpmfusion free and non-free repos
   dnf:
-    name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm"
+    name: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm
     state: present
   become: yes
 - name: install nvidia driver
   dnf:
-    name: "xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda"
+    name: xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda
     state: present
   become: yes
 - name: download cuda rpm
@@ -19,7 +19,7 @@
   become: yes
 - name: install ffmpeg, mpv and smplayer
   dnf:
-    name: "ffmpeg,mpv,qt5,smplayer"
+    name: ffmpeg,mpv,qt5,smplayer
     state: present
   become: yes
 - name: create smplayer config directory
@@ -30,6 +30,11 @@
   template:
     src: smplayer.ini
     dest: /home/whs/.config/smplayer/smplayer.ini
+- name: get makemkv latest verion
+  shell: curl -s "https://www.makemkv.com/forum/viewtopic.php?t=224" | grep "<title>" | cut -d " " -f 2
+  register: makemkv_version_result
+  args:
+    warn: false
 - import_tasks: makemkv.yml
   vars:
-    makemkv_version: 1.14.2
+    makemkv_version: makemkv_verion_result.stdout
