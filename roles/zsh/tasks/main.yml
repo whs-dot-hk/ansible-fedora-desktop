@@ -8,10 +8,10 @@
     name: whs
     shell: /usr/bin/zsh
   become: yes
-- name: get zplug stat 
+- name: get zplug stat
   stat:
     path: /home/whs/.zplug
-  register: st
+  register: zplug_st
 - name: install zplug
   shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  when: not st.stat.exists
+  when: not zplug_st.stat.exists
