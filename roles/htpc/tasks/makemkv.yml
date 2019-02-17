@@ -1,13 +1,13 @@
 - name: get makemkvcon stat
   stat:
     path: /usr/bin/makemkvcon
-  register: st
+  register: makemkvcon_st
 - import_tasks: makemkv-bin.yml
-  when: not st.stat.exists
-- name: get makemkv stat     
+  when: not makemkvcon_st.stat.exists
+- name: get makemkv stat
   stat:
-    path: /usr/bin/makemkv    
-  register: st
+    path: /usr/bin/makemkv
+  register: makemkv_st
 - import_tasks: makemkv-oss.yml
-  when: not st.stat.exists
+  when: not makemkv_st.stat.exists
 
