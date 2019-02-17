@@ -2,6 +2,7 @@
   hosts: all
   roles:
   - common
+  - ruby
   - htpc
   - nvim
   - zsh
@@ -10,3 +11,4 @@
   - virtualbox
   - kops
   - kubectl
+  - minikube
