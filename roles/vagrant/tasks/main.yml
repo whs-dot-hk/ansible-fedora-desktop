@@ -1,0 +1,8 @@
+- name: get vagrant latest rpm
+  shell: curl -s https://www.vagrantup.com/downloads.html | grep x86_64.rpm | cut -d '"' -f 8
+  register: vagrant_rpm_result
+- name: install vagrant
+  dnf:
+    name: "{{ vagrant_rpm_result.stdout }}"
+    state: present
+  become: yes

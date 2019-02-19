@@ -9,6 +9,7 @@
   - keepass
   - wine
   - virtualbox
+  - vagrant
   - kops
   - kubectl
   - minikube
