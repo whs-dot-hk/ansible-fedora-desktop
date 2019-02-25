@@ -1,0 +1,5 @@
+- name: install rcm
+  dnf:
+    name: rcm
+    state: present
+  become: yes
