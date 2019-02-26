@@ -5,13 +5,10 @@
   become: yes
 - name: change shell to zsh
   user:
-    name: whs
+    name: "{{ ansible_env.USERNAME }}"
     shell: /usr/bin/zsh
   become: yes
-- name: get zplug stat
-  stat:
-    path: /home/whs/.zplug
-  register: zplug_st
 - name: install zplug
   shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  when: not zplug_st.stat.exists
+  args:
+    creates: "{{ ansible_env.HOME }}/.zplug"
