@@ -5,8 +5,8 @@
   become: yes
 - name: import virtualbox key
   rpm_key:
-    state: present
     key: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
   become: yes
 - name: install virtualbox 6
   dnf:
