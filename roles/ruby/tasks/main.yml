@@ -14,17 +14,7 @@
   shell: curl -sSL https://get.rvm.io | bash -s stable --ruby
   args:
     creates: "{{ ansible_env.HOME }}/.rvm/rubies/default"
-- name: get gem path
-  shell: source /home/whs/.rvm/scripts/rvm && echo $(ruby -r rubygems -e 'puts Gem.user_dir')/bin
-  register: gem_path_result
-  args:
-    executable: /bin/bash
-- name: get rake stat
-  stat:
-    path: "{{ gem_path_result.stdout }}/rake"
-  register: rake_st
 - name: install rake
-  shell: source /home/whs/.rvm/scripts/rvm && gem install rake --user-install
-  when: not rake_st.stat.exists
-  args:
-    executable: /bin/bash
+  gem:
+    name: rake
+    state: present
