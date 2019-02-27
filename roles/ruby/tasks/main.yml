@@ -5,14 +5,6 @@
 - name: install rvm gpg keys
   shell: gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
   when: list_keys_result.rc != 0
-- name: get rvm stat
-  stat:
-    path: /home/whs/.rvm/bin/rvm
-  register: rvm_st
-- name: get ruby stat
-  stat:
-    path: /home/whs/.rvm/rubies/default
-  register: ruby_st
 - name: install ruby build dependencies
   dnf:
     name: autoconf,automake,bison,libffi-devel,libtool,libyaml-devel,readline-devel,sqlite-devel
@@ -20,7 +12,8 @@
   become: yes
 - name: install rvm and ruby
   shell: curl -sSL https://get.rvm.io | bash -s stable --ruby
-  when: not rvm_st.stat.exists or not ruby_st.stat.exists
+  args:
+    creates: "{{ ansible_env.HOME }}/.rvm/rubies/default"
 - name: get gem path
   shell: source /home/whs/.rvm/scripts/rvm && echo $(ruby -r rubygems -e 'puts Gem.user_dir')/bin
   register: gem_path_result
