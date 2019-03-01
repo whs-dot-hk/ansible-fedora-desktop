@@ -5,33 +5,29 @@
   become: yes
 - name: create nvim autoload directory
   file:
-    path: /home/whs/.local/share/nvim/site/autoload
+    path: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload"
     state: directory
 - name: install vim-plug
   get_url:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: /home/whs/.local/share/nvim/site/autoload/plug.vim
+    dest: "{{ ansible_env.HOME }}/.local/share/nvim/site/autoload/plug.vim"
 - name: install ack
   dnf:
     name: ack
     state: present
   become: yes
-- name: get janus stat
-  stat:
-    path: /home/whs/.vim/janus
-  register: janus_st
 - name: install janus
-  shell: source /home/whs/.rvm/scripts/rvm && export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH" && curl -L https://bit.ly/janus-bootstrap | bash
-  when: not janus_st.stat.exists
+  shell: curl -L https://bit.ly/janus-bootstrap | bash
   args:
+    creates: "{{ ansible_env.HOME }}/.vim/janus"
     executable: /bin/bash
 - name: link dotvim
   file:
-    src: /home/whs/.vim
-    dest: /home/whs/.config/nvim
+    src: "{{ ansible_env.HOME }}/.vim"
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
     state: link
 - name: link vimrc
   file:
-    src: /home/whs/.vimrc
-    dest: /home/whs/.config/nvim/init.vim
+    src: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
     state: link
