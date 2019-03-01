@@ -1,0 +1,20 @@
+- name: create fonts directory
+  file:
+    path: "{{ ansible_env.HOME }}/.local/share/fonts"
+    state: directory
+- name: install powerline symbol font
+  get_url:
+    url: https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+    dest: "{{ ansible_env.HOME }}/.local/share/fonts/PowerlineSymbols.otf"
+  register: install_font_result
+- name: update font cache
+  command: "fc-cache -vf {{ ansible_env.HOME }}/.local/share/fonts"
+  when: install_font_result.changed
+- name: create fontconfig directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/fontconfig/conf.d"
+    state: directory
+- name: install powerline fontconfig
+  get_url:
+    url: https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+    dest: "{{ ansible_env.HOME }}/.config/fontconfig/conf.d/10-powerline-symbols.conf"
