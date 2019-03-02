@@ -14,7 +14,3 @@
   shell: curl -sSL https://get.rvm.io | bash -s stable --ruby
   args:
     creates: "{{ ansible_env.HOME }}/.rvm/rubies/default"
-- name: install rake
-  gem:
-    name: rake
-    state: present

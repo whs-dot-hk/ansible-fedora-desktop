@@ -11,10 +11,10 @@
 - name: download cuda rpm
   get_url:
     url: https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64
-    dest: /home/whs/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm
+    dest: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm"
 - name: install the cuda rpm
   dnf:
-    name: /home/whs/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm
+    name: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm"
     state: present
   become: yes
 - name: install ffmpeg, mpv and smplayer
@@ -24,15 +24,15 @@
   become: yes
 - name: create smplayer config directory
   file:
-    path: /home/whs/.config/smplayer
+    path: "{{ ansible_env.HOME }}/.config/smplayer"
     state: directory
 - name: copy smplayer.ini
   template:
     src: smplayer.ini
-    dest: /home/whs/.config/smplayer/smplayer.ini
+    dest: "{{ ansible_env.HOME }}/.config/smplayer/smplayer.ini"
 - name: get makemkv latest verion
   shell: curl -s "https://www.makemkv.com/forum/viewtopic.php?t=224" | grep "<title>" | cut -d " " -f 2
   register: makemkv_version_result
 - import_tasks: makemkv.yml
   vars:
-    makemkv_version: makemkv_verion_result.stdout
+    makemkv_version: "{{ makemkv_version_result.stdout }}"

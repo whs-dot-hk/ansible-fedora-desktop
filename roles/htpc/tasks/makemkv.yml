@@ -10,4 +10,3 @@
   register: makemkv_st
 - import_tasks: makemkv-oss.yml
   when: not makemkv_st.stat.exists
-

@@ -17,9 +17,9 @@
     state: present
   become: yes
 - name: install janus
-  shell: curl -L https://bit.ly/janus-bootstrap | bash
+  shell: "source \"{{ ansible_env.HOME }}/.rvm/scripts/rvm\" && curl -L https://bit.ly/janus-bootstrap | bash"
   args:
-    creates: "{{ ansible_env.HOME }}/.vim/janus"
+    creates: "{{ ansible_env.HOME }}/.vim"
     executable: /bin/bash
 - name: link dotvim
   file:
