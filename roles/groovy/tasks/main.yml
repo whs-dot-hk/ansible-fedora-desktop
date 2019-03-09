@@ -1,0 +1,8 @@
+- name: install sdkman
+  shell: curl -s "https://get.sdkman.io" | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman"
+- name: install groovy
+  shell: "source {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && sdk install groovy"
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman/candidates/groovy"
