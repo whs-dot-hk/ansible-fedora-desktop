@@ -4,3 +4,5 @@
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 - name: install node
   shell: "source {{ ansible_env.HOME }}/.bashrc && nvm install node"
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
