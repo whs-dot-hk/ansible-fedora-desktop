@@ -4,6 +4,7 @@
   - common
   - rcm
   - ruby
+  - java
   - node
   - htpc
   - nvim
@@ -16,4 +17,3 @@
   - kops
   - kubectl
   - minikube
-  - groovy
