@@ -9,4 +9,5 @@
     extra_opts:
     - linux-amd64/helm
     - --strip-components=1
+    creates: /usr/local/bin/helm
   become: yes
