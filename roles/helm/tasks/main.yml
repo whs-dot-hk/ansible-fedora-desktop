@@ -1,0 +1,12 @@
+- name: get helm latest version
+  shell: curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d '"' -f 4
+  register: helm_version_result
+- name: install helm
+  unarchive:
+    src: "https://storage.googleapis.com/kubernetes-helm/helm-{{ helm_version_result.stdout }}-linux-amd64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+    extra_opts:
+    - linux-amd64/helm
+    - --strip-components=1
+  become: yes
