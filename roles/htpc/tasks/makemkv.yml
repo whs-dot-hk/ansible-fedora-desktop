@@ -2,11 +2,19 @@
   stat:
     path: /usr/bin/makemkvcon
   register: makemkvcon_st
+- name: get downloaded makemkv-bin stat
+  stat:
+    path: "{{ ansible_env.HOME }}/Downloads/makemkv-bin-{{ makemkv_version }}"
+  register: makemkv_bin_st
 - import_tasks: makemkv-bin.yml
-  when: not makemkvcon_st.stat.exists
+  when: not makemkvcon_st.stat.exists or not makemkv_bin_st.stat.exists
 - name: get makemkv stat
   stat:
     path: /usr/bin/makemkv
   register: makemkv_st
+- name: get downloaded makemkv-oss stat
+  stat:
+    path: "{{ ansible_env.HOME }}/Downloads/makemkv-oss-{{ makemkv_version }}"
+  register: makemkv_oss_st
 - import_tasks: makemkv-oss.yml
-  when: not makemkv_st.stat.exists
+  when: not makemkv_st.stat.exists or not makemkv_oss_st.stat.exists
