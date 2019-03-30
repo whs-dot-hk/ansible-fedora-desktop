@@ -1,0 +1,20 @@
+- name: install ack
+  dnf:
+    name: ack
+    state: present
+  become: yes
+- name: install janus
+  shell: "source \"{{ ansible_env.HOME }}/.rvm/scripts/rvm\" && curl -L https://bit.ly/janus-bootstrap | bash"
+  args:
+    creates: "{{ ansible_env.HOME }}/.vim"
+    executable: /bin/bash
+- name: link dotvim
+  file:
+    src: "{{ ansible_env.HOME }}/.vim"
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    state: link
+- name: link vimrc
+  file:
+    src: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
+    state: link
