@@ -2,19 +2,7 @@
   hosts: all
   roles:
   - common
-  - rcm
-  - ruby
-  - java
-  - node
   - htpc
   - nvim
-  - zsh
-  - powerline-font
-  - keepass
-  - wine
-  - virtualbox
-  - vagrant
-  - kops
-  - kubectl
-  - minikube
-  - helm
+  - janus
+  - borg
