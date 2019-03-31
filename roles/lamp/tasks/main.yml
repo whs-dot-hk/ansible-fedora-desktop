@@ -1,0 +1,17 @@
+- name: install lamp
+  dnf:
+    name: httpd,mariadb,mariadb-server,php,php-mysqlnd
+    state: present
+  become: yes
+- name: start and enable httpd
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
+  become: yes
+- name: start and enable mariadb
+  systemd:
+    name: mariadb
+    state: started
+    enabled: yes
+  become: yes

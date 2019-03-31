@@ -1,0 +1,12 @@
+- name: install php mbstring, xml and json
+  dnf:
+    name: php-mbstring,php-xml,php-json
+    state: present
+  become: yes
+- name: install mediawiki
+  unarchive:
+    src: "https://releases.wikimedia.org/mediawiki/1.32/mediawiki-1.32.0.tar.gz"
+    dest: /var/www/html
+    remote_src: yes
+    creates: /var/www/html/mediawiki-1.32.0
+  become: yes
