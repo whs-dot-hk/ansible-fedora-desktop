@@ -1,0 +1,9 @@
+- name: download cuda rpm
+  get_url:
+    url: https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-fedora29-10-1-local-10.1.105-418.39-1.0-1.x86_64.rpm
+    dest: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.105-418.39-1.0-1.x86_64.rpm"
+- name: install the cuda rpm
+  dnf:
+    name: "xorg-x11-drv-nvidia-cuda,{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.105-418.39-1.0-1.x86_64.rpm"
+    state: present
+  become: yes

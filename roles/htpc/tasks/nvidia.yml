@@ -1,0 +1,10 @@
+- name: install rpmfusion free and non-free repos
+  dnf:
+    name: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm
+    state: present
+  become: yes
+- name: install nvidia driver
+  dnf:
+    name: xorg-x11-drv-nvidia,akmod-nvidia
+    state: present
+  become: yes

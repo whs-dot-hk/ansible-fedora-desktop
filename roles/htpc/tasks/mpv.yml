@@ -1,0 +1,13 @@
+- name: install mpv and smplayer
+  dnf:
+    name: mpv,qt5,smplayer
+    state: present
+  become: yes
+- name: create smplayer config directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/smplayer"
+    state: directory
+- name: copy smplayer.ini
+  template:
+    src: smplayer.ini
+    dest: "{{ ansible_env.HOME }}/.config/smplayer/smplayer.ini"

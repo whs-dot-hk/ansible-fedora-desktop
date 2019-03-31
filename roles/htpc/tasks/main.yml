@@ -1,35 +1,11 @@
-- name: install rpmfusion free and non-free repos
+- import_tasks: nvidia.yml
+- import_tasks: cuda.yml
+- name: install ffmpeg
   dnf:
-    name: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-29.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-29.noarch.rpm
+    name: ffmpeg
     state: present
   become: yes
-- name: install nvidia driver
-  dnf:
-    name: xorg-x11-drv-nvidia,akmod-nvidia,xorg-x11-drv-nvidia-cuda
-    state: present
-  become: yes
-- name: download cuda rpm
-  get_url:
-    url: https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64
-    dest: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm"
-- name: install the cuda rpm
-  dnf:
-    name: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora27-10-0-local-10.0.130-410.48-1.0-1.x86_64.rpm"
-    state: present
-  become: yes
-- name: install ffmpeg, mpv and smplayer
-  dnf:
-    name: ffmpeg,mpv,qt5,smplayer
-    state: present
-  become: yes
-- name: create smplayer config directory
-  file:
-    path: "{{ ansible_env.HOME }}/.config/smplayer"
-    state: directory
-- name: copy smplayer.ini
-  template:
-    src: smplayer.ini
-    dest: "{{ ansible_env.HOME }}/.config/smplayer/smplayer.ini"
+- import_tasks: mpv.yml
 - name: get makemkv latest verion
   shell: curl -s "https://www.makemkv.com/forum/viewtopic.php?t=224" | grep "<title>" | cut -d " " -f 2
   register: makemkv_version_result
