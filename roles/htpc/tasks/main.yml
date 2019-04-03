@@ -1,4 +1,3 @@
-- import_tasks: cuda.yml
 - name: install ffmpeg
   dnf:
     name: ffmpeg
