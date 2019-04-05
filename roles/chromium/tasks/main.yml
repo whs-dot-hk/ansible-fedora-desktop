@@ -1,0 +1,5 @@
+- name: install chromium
+  dnf:
+    name: chromium
+    state: present
+  become: yes
