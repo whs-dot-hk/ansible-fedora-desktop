@@ -3,9 +3,12 @@
     name: php-mbstring,php-xml,php-json
     state: present
   become: yes
+- name: get mediawiki latest version url
+  shell: curl -s https://www.mediawiki.org/wiki/Download | grep "Download MediaWiki" | cut -d '"' -f 26
+  register: mediawiki_url
 - name: install mediawiki
   unarchive:
-    src: "https://releases.wikimedia.org/mediawiki/1.32/mediawiki-1.32.0.tar.gz"
+    src: "{{ mediawiki_url.stdout }}"
     dest: /var/www/html
     remote_src: yes
     creates: /var/www/html/mediawiki-1.32.0
