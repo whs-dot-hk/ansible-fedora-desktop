@@ -1,0 +1,5 @@
+- name: install builder
+  flatpak:
+    name: https://flathub.org/repo/appstream/org.gnome.Builder.flatpakref
+    state: present
+    method: user
