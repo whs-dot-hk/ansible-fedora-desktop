@@ -1,0 +1,5 @@
+- name: install filezilla
+  dnf:
+    name: filezilla
+    state: present
+  become: yes
