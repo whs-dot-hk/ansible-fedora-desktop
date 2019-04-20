@@ -1,0 +1,4 @@
+- name: install sbt
+  shell: "source {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && sdk install sbt"
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman/candidates/sbt"
