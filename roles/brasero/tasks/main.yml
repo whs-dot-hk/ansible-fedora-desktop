@@ -1,0 +1,5 @@
+- name: install brasero
+  dnf:
+    name: brasero
+    state: present
+  become: yes
