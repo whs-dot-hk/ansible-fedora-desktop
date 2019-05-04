@@ -1,0 +1,10 @@
+- name: install python-devel
+  dnf:
+    name: python-devel
+    state: present
+  become: yes
+- name: install awscli
+  pip:
+    name: awscli
+    executable: pip-2.7
+    extra_args: --user
