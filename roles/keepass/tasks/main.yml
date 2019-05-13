@@ -1,3 +1,8 @@
+- name: install mono-complete
+  dnf:
+    name: mono-complete
+    state: present
+  become: yes
 - name: install keepass
   dnf:
     name: keepass
@@ -5,6 +10,6 @@
   become: yes
 - name: download keepassrpc
   get_url:
-    url: https://github.com/kee-org/keepassrpc/releases/download/v1.8.0/KeePassRPC.plgx
+    url: https://github.com/kee-org/keepassrpc/releases/download/v1.9.0/KeePassRPC.plgx
     dest: /usr/lib/keepass/KeePassRPC.plgx
   become: yes
