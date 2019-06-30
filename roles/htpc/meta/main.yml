@@ -1,2 +1,2 @@
 dependencies:
-- role: nvidia
+- role: cuda

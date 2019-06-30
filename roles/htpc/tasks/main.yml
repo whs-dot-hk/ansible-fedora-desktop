@@ -4,9 +4,3 @@
     state: present
   become: yes
 - import_tasks: mpv.yml
-- name: get makemkv latest verion
-  shell: curl -s "https://www.makemkv.com/forum/viewtopic.php?t=224" | grep "<title>" | cut -d " " -f 2
-  register: makemkv_version_result
-- import_tasks: makemkv.yml
-  vars:
-    makemkv_version: "{{ makemkv_version_result.stdout }}"
