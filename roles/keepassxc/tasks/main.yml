@@ -1,0 +1,5 @@
+- name: install keepassxc
+  dnf:
+    name: keepassxc
+    state: present
+  become: yes
