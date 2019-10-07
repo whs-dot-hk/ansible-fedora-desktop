@@ -1,0 +1,11 @@
+- name: install golang
+  unarchive:
+    src: https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: yes
+    creates: /usr/local/go/bin
+  become: yes
+- name: add go to path
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: export PATH=$PATH:/usr/local/go/bin
