@@ -1,0 +1,5 @@
+- name: install restic
+  dnf:
+    name: restic
+    state: present
+  become: yes
