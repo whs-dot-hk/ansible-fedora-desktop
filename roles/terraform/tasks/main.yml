@@ -1,0 +1,10 @@
+- name: get terraform latest rpm
+  shell: curl -s https://www.terraform.io/downloads.html | grep linux_amd64.zip | cut -d '"' -f 2
+  register: terraform_zip_result
+- name: install terraform
+  unarchive:
+    src: "{{ terraform_zip_result.stdout }}"
+    dest: /usr/local/bin
+    remote_src: yes
+    creates: /usr/local/bin/terraform
+  become: yes
