@@ -1,5 +1,5 @@
 - name: install rpmfusion free and non-free repos
   dnf:
-    name: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-30.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-30.noarch.rpm
+    name: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-31.noarch.rpm,https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-31.noarch.rpm
     state: present
   become: yes
