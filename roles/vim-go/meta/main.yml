@@ -1,0 +1,3 @@
+dependencies:
+- role: janus
+- role: golang

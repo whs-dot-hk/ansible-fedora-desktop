@@ -1,0 +1,10 @@
+- name: create dot janus directory
+  file:
+    path: "{{ ansible_env.HOME }}/.janus"
+    state: directory
+- name: install vim-go
+  git:
+    repo: https://github.com/fatih/vim-go.git
+    dest: "{{ ansible_env.HOME }}/.janus/vim-go"
+- name: install vim-go dependences
+  command: nvim +GoInstallBinaries +q
