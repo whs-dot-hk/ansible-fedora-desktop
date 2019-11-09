@@ -1,14 +1,15 @@
 - name: download cuda rpm
   get_url:
-    url: https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-fedora29-10-1-local-10.1.105-418.39-1.0-1.x86_64.rpm
-    dest: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.168-418.67-1.0-1.x86_64.rpm"
+    url: http://developer.download.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda-repo-fedora29-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm
+    dest: "{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm"
+    checksum: sha256:12d9215510b5c1c5af7c2c4943f32ffb72fb8abd9bb7582f59b03b7ec56287e0
 - name: install the cuda rpm
   dnf:
-    name: "xorg-x11-drv-nvidia-cuda,{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.168-418.67-1.0-1.x86_64.rpm"
+    name: "xorg-x11-drv-nvidia-cuda,xorg-x11-drv-nvidia-cuda-libs,{{ ansible_env.HOME }}/Downloads/cuda-repo-fedora29-10-1-local-10.1.243-418.87.00-1.0-1.x86_64.rpm"
     state: present
   become: yes
 - name: add cuda repo excludes
   lineinfile:
-    path: /etc/yum.repos.d/cuda-10-1-local-10.1.168-418.67.repo
+    path: /etc/yum.repos.d/cuda-10-1-local-10.1.243-418.87.00.repo
     line: exclude=akmod-nvidia*,kmod-nvidia*,*nvidia*,nvidia-*,cuda-nvidia-kmod-common,dkms-nvidia,nvidia-libXNVCtrl
   become: yes
