@@ -1,5 +1,5 @@
-- name: install wine and winetricks
+- name: install wine
   dnf:
-    name: wine,winetricks
+    name: wine
     state: present
   become: yes
