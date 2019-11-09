@@ -4,7 +4,7 @@
     state: present
   become: yes
 - name: get mediawiki latest version url
-  shell: curl -s https://www.mediawiki.org/wiki/Download | grep "Download MediaWiki" | cut -d '"' -f 26
+  shell: curl -s https://www.mediawiki.org/wiki/Download | grep "Download MediaWiki" | cut -d '"' -f 28
   register: mediawiki_url
 - name: get mediawiki folder name
   shell: "basename -s .tar.gz {{ mediawiki_url.stdout }}"
