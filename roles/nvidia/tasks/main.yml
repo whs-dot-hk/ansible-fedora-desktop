@@ -1,5 +1,5 @@
 - name: install nvidia driver
   dnf:
-    name: xorg-x11-drv-nvidia,akmod-nvidia
+    name: akmod-nvidia
     state: present
   become: yes
