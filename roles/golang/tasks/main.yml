@@ -9,3 +9,8 @@
   lineinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     line: export PATH=$PATH:/usr/local/go/bin
+- name: install vim-go
+  include_role:
+    name: vim-go
+  vars:
+    fromgolang: true

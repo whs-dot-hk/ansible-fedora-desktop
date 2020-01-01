@@ -1,3 +1,4 @@
 dependencies:
 - role: janus
 - role: golang
+  when: not fromgolang
