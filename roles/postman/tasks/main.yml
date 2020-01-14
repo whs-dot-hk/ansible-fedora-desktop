@@ -1,0 +1,11 @@
+- name: install postman
+  unarchive:
+    src: https://dl.pstmn.io/download/latest/linux64
+    dest: /opt
+    remote_src: yes
+    creates: /opt/Postman
+  become: yes
+- name: create postman dot desktop
+  template:
+    src: Postman.desktop
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/Postman.desktop"
