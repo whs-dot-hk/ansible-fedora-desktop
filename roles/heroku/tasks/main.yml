@@ -1,0 +1,13 @@
+- name: install heroku
+  unarchive:
+    src: https://cli-assets.heroku.com/heroku-linux-x64.tar.gz
+    dest: /usr/local/lib
+    remote_src: yes
+    creates: /usr/local/lib/heroku
+  become: yes
+- name: link heroku
+  file:
+    src: /usr/local/lib/heroku/bin/heroku
+    dest: /usr/local/bin/heroku
+    state: link
+  become: yes
