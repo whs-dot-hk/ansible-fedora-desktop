@@ -1,0 +1,4 @@
+- name: install scala
+  shell: "source {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && sdk install scala"
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman/candidates/scala"

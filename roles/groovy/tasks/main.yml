@@ -1,0 +1,4 @@
+- name: install groovy
+  shell: "source {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && sdk install groovy"
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman/candidates/groovy"
