@@ -1,0 +1,4 @@
+- name: install vimwiki
+  git:
+    repo: https://github.com/vimwiki/vimwiki.git
+    dest: "{{ ansible_env.HOME }}/.janus/vimwiki"
