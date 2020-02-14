@@ -1,4 +1,20 @@
+- name: create bundle directory
+  file:
+    path: "{{ ansible_env.HOME }}/.vim/bundle"
+    state: directory
 - name: install vimwiki
   git:
     repo: https://github.com/vimwiki/vimwiki.git
-    dest: "{{ ansible_env.HOME }}/.janus/vimwiki"
+    dest: "{{ ansible_env.HOME }}/.vim/bundle/vimwiki"
+- name: add set nocompatible to vimrc
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.vimrc"
+    line: set nocompatible
+- name: add filetype plugin on to vimrc
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.vimrc"
+    line: filetype plugin on
+- name: add syntax on to vimrc
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.vimrc"
+    line: syntax on
