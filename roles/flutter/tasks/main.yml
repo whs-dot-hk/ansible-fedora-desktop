@@ -1,0 +1,16 @@
+- name: create development directory
+  file:
+    path: "{{ ansible_env.HOME }}/development"
+    state: directory
+- name: download flutter
+  unarchive:
+    src: https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.12.13+hotfix.8-stable.tar.xz
+    dest: "{{ ansible_env.HOME}}/development"
+    remote_src: yes
+    creates: "{{ ansible_env.HOME }}/development/flutter"
+- name: export flutter path
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: "export PATH=$PATH:{{ ansible_env.HOME }}/development/flutter/bin"
+- name: run flutter precache
+  shell: "source {{ ansible_env.HOME }}/.bashrc && flutter precache"
