@@ -18,3 +18,7 @@
     src: "{{ ansible_env.HOME }}/.vimrc"
     dest: "{{ ansible_env.HOME }}/.config/nvim/init.vim"
     state: link
+- name: create dot janus directory
+  file:
+    path: "{{ ansible_env.HOME }}/.janus"
+    state: directory
