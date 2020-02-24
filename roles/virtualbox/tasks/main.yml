@@ -10,6 +10,6 @@
   become: yes
 - name: install virtualbox 6
   dnf:
-    name: VirtualBox-6.0
+    name: VirtualBox-6.1
     state: present
   become: yes
